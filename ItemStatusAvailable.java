@@ -14,11 +14,6 @@ public class ItemStatusAvailable implements ItemStatus {
     }
 
     @Override
-    public String checkinOperationMsg() {
-        return null;
-    }
-
-    @Override
     public boolean over(Day current) {
         return false;
     }

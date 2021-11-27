@@ -35,8 +35,7 @@ public class ItemStatusOnhold implements ItemStatus {
         return member;
     }
 
-    @Override
-    public String checkinOperationMsg() {
+    public String readyToPickMsg() {
         return String.format("Item [%s %s] is ready for pick up by [%s].  On hold due on %s.", item.getId(), item.getName(), member.getIdPlusName(), holdUntil);
     }
 
@@ -53,6 +52,6 @@ public class ItemStatusOnhold implements ItemStatus {
         } catch (ExRequestQuotaExceeded e) {
             // Do nothing
         }
-        System.out.printf("Sorry. %s please ignore the pick up notice for %s %s.\n", member.getIdPlusName(), item.getId(), item.getName());      
+        System.out.printf("Sorry. %s please ignore the pick up notice for %s.\n", member.getIdPlusName(), item.getIdPlusName());      
     }
 }

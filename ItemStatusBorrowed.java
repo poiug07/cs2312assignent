@@ -33,11 +33,6 @@ public class ItemStatusBorrowed implements ItemStatus {
     }
 
     @Override
-    public String checkinOperationMsg() {
-        return null;
-    }
-
-    @Override
     public boolean over(Day current) {
         // Later can be used for borrow period catering
         return false;

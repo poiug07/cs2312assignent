@@ -5,13 +5,14 @@ public class Item implements Comparable<Item> {
     private String name;
     private Day arrDate;
     private ItemStatus status;
-    // Queue contains only member in the queue, onHold Members considered out of queue
+    // Queue contains only member in the queue, onHold Members considered out of
+    // queue
     private ArrayList<Member> queue;
 
     public Item(String i, String n) throws ExItemIdInUse {
         Item existing = Club.getInstance().getItem(i);
         if (existing != null)
-            throw new ExItemIdInUse("Item ID already in use: " + existing.getId() + " " + existing.getName());
+            throw new ExItemIdInUse("Item ID already in use: " + existing.getIdPlusName());
 
         this.id = i;
         this.name = n;
@@ -24,6 +25,10 @@ public class Item implements Comparable<Item> {
 
     public String getId() {
         return id;
+    }
+
+    public String getIdPlusName() {
+        return id + " " + name;
     }
 
     public String getListingString() {
@@ -42,11 +47,11 @@ public class Item implements Comparable<Item> {
     public void changeStatus(ItemStatus s) {
         status = s;
     }
-
+    
     public ItemStatus getStatus() {
         return status;
     }
-
+    
     public String getName() {
         return name;
     }
@@ -76,9 +81,8 @@ public class Item implements Comparable<Item> {
                 status = new ItemStatusOnhold(onholdfor, holdUntil, this, queue);
                 queue.remove(0);
                 onholdfor.decrementRequestedItems();
+                System.out.println(((ItemStatusOnhold) status).readyToPickMsg());
             }
-            if (status.checkinOperationMsg() != null)
-                System.out.println(status.checkinOperationMsg());
         }
     }
 
@@ -98,10 +102,6 @@ public class Item implements Comparable<Item> {
 
     }
 
-    public int getIdxInQueue(Member m) {
-        return queue.indexOf(m);
-    }
-
     public void cancelRequest(Member m) throws ExRequestNotFound {
         if (queue.contains(m)) {
             queue.remove(m);
@@ -109,6 +109,11 @@ public class Item implements Comparable<Item> {
         } else {
             throw new ExRequestNotFound();
         }
+    }
+
+    
+    public int getIdxInQueue(Member m) {
+        return queue.indexOf(m);
     }
 
     protected void insertIntoQueue(Member m, int i) {
@@ -120,7 +125,7 @@ public class Item implements Comparable<Item> {
     public void updateOnHold(Day current) {
         if (status instanceof ItemStatusOnhold) {
             if (status.over(current)) {
-                System.out.println("On hold period is over for " + id + " " + name + ".");
+                System.out.println("On hold period is over for " + getIdPlusName() + ".");
                 status = new ItemStatusAvailable();
                 if (queue.size() > 0) {
                     Member onholdfor = queue.get(0);
@@ -128,9 +133,8 @@ public class Item implements Comparable<Item> {
                     status = new ItemStatusOnhold(onholdfor, holdUntil, this, queue);
                     queue.remove(0);
                     onholdfor.decrementRequestedItems();
+                    System.out.println(((ItemStatusOnhold) status).readyToPickMsg());
                 }
-                if (this.getStatus().checkinOperationMsg() != null)
-                    System.out.println(this.getStatus().checkinOperationMsg());
             }
         }
     }
