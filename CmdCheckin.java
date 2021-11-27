@@ -19,6 +19,7 @@ public class CmdCheckin extends RecordedCommand {
         statusdump = item.getStatus();
 
         item.checkin(member);
+        
         addUndoCommand(this);
         clearRedoList();
         
@@ -41,19 +42,18 @@ public class CmdCheckin extends RecordedCommand {
             System.out.printf("Sorry. %s please ignore the pick up notice for %s.\n", member.getIdPlusName(), item.getIdPlusName());
         }
     
-
         try {
             this.member.checkoutItem();
         } catch (ExLoanQuotaExceeded e) {
             // Do nothing
         }
+        
         addRedoCommand(this);
     }
     
     @Override
     public void redoMe() {
-        ItemStatus temp = item.getStatus();
-        this.statusdump = temp;
+        this.statusdump = item.getStatus();
         
         try {
             item.checkin(member);
@@ -61,6 +61,7 @@ public class CmdCheckin extends RecordedCommand {
             // Do nothing
             e.printStackTrace();
         }
+        
         addUndoCommand(this);
     }
 }

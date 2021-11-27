@@ -5,24 +5,27 @@ public class CmdRequest extends RecordedCommand {
     private ItemStatus statusdump;
 
     @Override
-    public void execute(String[] cmdParts) throws ExMemberNotFound, ExItemNotFound, ExItemBorrowedByAnother, ExRequestQuotaExceeded, ExAlreadyRequested, ExItemIsAvailable, ExItemAlreadyBorrowedByThis, ExInsufficientArguments {
-        if (!(new ArgumentNumberChecker().pass(3, cmdParts))){
+    public void execute(String[] cmdParts)
+            throws ExMemberNotFound, ExItemNotFound, ExRequestQuotaExceeded,
+            ExAlreadyRequested, ExItemIsAvailable, ExItemAlreadyBorrowedByThis, ExInsufficientArguments {
+        if (!ArgumentNumberChecker.pass(3, cmdParts)) {
             throw new ExInsufficientArguments();
         }
         Club c = Club.getInstance();
         member = c.getMember(cmdParts[1]);
-        if(member==null)
+        if (member == null)
             throw new ExMemberNotFound();
         item = c.getItem(cmdParts[2]);
-        if(item==null)
+        if (item == null)
             throw new ExItemNotFound();
         statusdump = item.getStatus();
 
         item.request(member);
+        
         addUndoCommand(this);
         clearRedoList();
-        
-        System.out.println("Done. This request is no. " + (item.getIdxInQueue(member)+1) + " in the queue.");  
+
+        System.out.println("Done. This request is no. " + (item.getIdxInQueue(member) + 1) + " in the queue.");
     }
 
     @Override
@@ -36,6 +39,7 @@ public class CmdRequest extends RecordedCommand {
         } catch (ExRequestNotFound e) {
             // Do nothing
         }
+
         addRedoCommand(this);
     }
 
@@ -47,16 +51,10 @@ public class CmdRequest extends RecordedCommand {
 
         try {
             this.item.request(member);
-        } catch (ExRequestQuotaExceeded | ExAlreadyRequested e) {
+        } catch (ExRequestQuotaExceeded | ExAlreadyRequested | ExItemIsAvailable | ExItemAlreadyBorrowedByThis e) {
             // Do nothing
-            e.printStackTrace();
-        } catch (ExItemIsAvailable e) {
-            // Do nothing
-            e.printStackTrace();
-        } catch (ExItemAlreadyBorrowedByThis e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
+
         addUndoCommand(this);
     }
 }

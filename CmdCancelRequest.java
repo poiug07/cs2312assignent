@@ -1,8 +1,8 @@
 public class CmdCancelRequest extends RecordedCommand {
 
-    private int idx;
-    private Item item;
     private Member member;
+    private Item item;
+    private int idx;
 
     @Override
     public void execute(String[] cmdParts)
@@ -17,9 +17,10 @@ public class CmdCancelRequest extends RecordedCommand {
         item = c.getItem(cmdParts[2]);
         if (item == null)
             throw new ExItemNotFound();
-
         idx = item.getIdxInQueue(member);
+        
         item.cancelRequest(member);
+        
         addUndoCommand(this);
         clearRedoList();
 
@@ -34,6 +35,7 @@ public class CmdCancelRequest extends RecordedCommand {
         } catch (ExRequestQuotaExceeded e) {
             // Do nothing
         }
+        
         addRedoCommand(this);
     }
 
@@ -45,6 +47,7 @@ public class CmdCancelRequest extends RecordedCommand {
         } catch (ExRequestNotFound e) {
             // Do nothing
         }
+        
         addUndoCommand(this);
     }
 

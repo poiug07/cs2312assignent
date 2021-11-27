@@ -1,5 +1,6 @@
 public class CmdStartNewDay extends RecordedCommand {
 
+    // String because, we cannot store 2 instances of SystemDate
     private String dump;
 
     @Override
@@ -9,10 +10,10 @@ public class CmdStartNewDay extends RecordedCommand {
 
         instance.set(cmdParts[1]);
         Club.getInstance().updateOnHolds();
-        // TODO check items which are due 
         
         addUndoCommand(this);
         clearRedoList();
+
         System.out.println("Done.");
     }
 
@@ -22,6 +23,7 @@ public class CmdStartNewDay extends RecordedCommand {
         String temp = instance.toString();
         instance.set(dump);
         dump = temp;
+
         addRedoCommand(this);
     }
 
@@ -31,6 +33,7 @@ public class CmdStartNewDay extends RecordedCommand {
         String temp = instance.toString();
         instance.set(dump);
         dump = temp;
+        
         addUndoCommand(this);
     }
 }

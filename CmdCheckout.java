@@ -4,10 +4,9 @@ public class CmdCheckout extends RecordedCommand {
     private Item item;
     private ItemStatus statusdump;
 
-    // TODO: implement checkout
     @Override
     public void execute(String[] cmdParts) throws ExMemberNotFound, ExItemNotFound, ExItemBorrowedByAnother, ExLoanQuotaExceeded, ExItemNotAvailable, ExItemAlreadyBorrowedByThis, ExInsufficientArguments {
-        if (!(new ArgumentNumberChecker().pass(3, cmdParts))){
+        if (!ArgumentNumberChecker.pass(3, cmdParts)){
             throw new ExInsufficientArguments();
         }
         Club c = Club.getInstance();
@@ -19,8 +18,8 @@ public class CmdCheckout extends RecordedCommand {
             throw new ExItemNotFound();
         statusdump = item.getStatus();
         
-        // Check item status without instanceof
         item.tryToCheckout(member);
+        
         addUndoCommand(this);
         clearRedoList();
         
@@ -34,6 +33,7 @@ public class CmdCheckout extends RecordedCommand {
         this.statusdump = temp;
 
         this.member.decrementBorrowedItems();
+        
         addRedoCommand(this);
     }
 
@@ -48,6 +48,7 @@ public class CmdCheckout extends RecordedCommand {
         } catch (ExLoanQuotaExceeded e) {
             // Do Nothing
         }
+        
         addUndoCommand(this);
     }
 }
