@@ -31,12 +31,12 @@ public class Club {
         return null;
     }
 
-    public void addMember(Member m) {
+    protected void addMember(Member m) {
         allMembers.add(m);
         Collections.sort(allMembers);
     }
 
-    public void deleteMember(Member m) {
+    protected void deleteMember(Member m) {
         allMembers.remove(m);
     }
 
@@ -47,12 +47,12 @@ public class Club {
         }
     }
 
-    public void addItem(Item i) {
+    protected void addItem(Item i) {
         allItems.add(i);
         Collections.sort(allItems);
     }
 
-    public void deleteItem(Item i) {
+    protected void deleteItem(Item i) {
         allItems.remove(i);
     }
 

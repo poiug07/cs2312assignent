@@ -1,7 +1,7 @@
 public interface ItemStatus {
     // Exception should not be thrown by status.
-    // Status is objective state, caller must decide
-    // if it is erroneous and perform actions accordingly.
+    // Status is objective state. Caller must decide
+    // if state is erroneous and perform actions accordingly.
     public String toString();
     boolean isAvailableTo(Member m);
     public Member getMember();

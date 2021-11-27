@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException, ExItemAlreadyBorrowedByThis {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner in = new Scanner(System.in);
 
@@ -58,31 +58,15 @@ public class Main {
                 else {
                     System.out.println("Unknown command - ignored.");
                 }
-            } catch (ExItemIdInUse e) {
-                System.out.println(e.getMessage());
-            } catch (ExMemberIdInUse e) {
-                System.out.println(e.getMessage());
-            } catch (ExMemberNotFound e) {
-                System.out.println(e.getMessage());
-            } catch (ExItemNotFound e) {
-                System.out.println(e.getMessage());
-            } catch (ExItemBorrowedByAnother e) {
-                System.out.println(e.getMessage());
-            } catch (ExLoanQuotaExceeded e) {
-                System.out.println(e.getMessage());
-            } catch (ExItemNotAvailable e) {
-                System.out.println(e.getMessage());
-            } catch (ExRequestQuotaExceeded e) {
-                System.out.println(e.getMessage());
-            } catch (ExAlreadyRequested e) {
-                System.out.println(e.getMessage());
-            } catch (ExItemIsAvailable e) {
-                System.out.println(e.getMessage());
-            } catch (ExItemAlreadyBorrowedByThis e) {
-                System.out.println(e.getMessage());
-            } catch (ExRequestNotFound e) {
-                System.out.println(e.getMessage());
             } catch (ExInsufficientArguments e) {
+                System.out.println(e.getMessage());
+            } catch (ExEntityRegistration e) {
+                System.out.println(e.getMessage());
+            } catch (ExObjectNotFound e) {
+                System.out.println(e.getMessage());
+            } catch (ExQuotaExceeded e) {
+                System.out.println(e.getMessage());
+            } catch (ExInvalidOperation e) {
                 System.out.println(e.getMessage());
             }
         }

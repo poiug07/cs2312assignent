@@ -116,9 +116,7 @@ public class Item implements Comparable<Item> {
         return queue.indexOf(m);
     }
 
-    protected void insertIntoQueue(Member m, int i) {
-        // Protected to restrict direct modification of queue
-        // only by package and subclasses
+    public void insertIntoQueue(Member m, int i) {
         queue.add(i, m);
     }
 

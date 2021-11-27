@@ -2,7 +2,7 @@ import java.util.*;
 
 public abstract class RecordedCommand implements Command {
 
-    public abstract void undoMe() throws ExLoanQuotaExceeded;
+    public abstract void undoMe();
 
     public abstract void redoMe();
 

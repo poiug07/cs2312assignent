@@ -28,7 +28,7 @@ public class CmdCancelRequest extends RecordedCommand {
     }
 
     @Override
-    public void undoMe() throws ExLoanQuotaExceeded {
+    public void undoMe() {
         item.insertIntoQueue(member, idx);
         try {
             member.request();
