@@ -44,14 +44,4 @@ public class ItemStatusOnhold implements ItemStatus {
         return holdUntil.compareTo(current) < 0;
     }
 
-    @Override
-    public void printSorryMessage() {
-        item.insertIntoQueue(member, 0);
-        try {
-            member.request();
-        } catch (ExRequestQuotaExceeded e) {
-            // Do nothing
-        }
-        System.out.printf("Sorry. %s please ignore the pick up notice for %s.\n", member.getIdPlusName(), item.getIdPlusName());      
-    }
 }

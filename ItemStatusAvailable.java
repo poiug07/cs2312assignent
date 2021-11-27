@@ -18,7 +18,4 @@ public class ItemStatusAvailable implements ItemStatus {
         return false;
     }
 
-    @Override
-    public void printSorryMessage() {
-    }
 }

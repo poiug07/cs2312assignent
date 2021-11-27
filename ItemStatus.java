@@ -6,5 +6,4 @@ public interface ItemStatus {
     boolean isAvailableTo(Member m);
     public Member getMember();
     public boolean over(Day current);
-    public void printSorryMessage();
 }

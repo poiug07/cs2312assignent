@@ -37,8 +37,4 @@ public class ItemStatusBorrowed implements ItemStatus {
         // Later can be used for borrow period catering
         return false;
     }
-
-    @Override
-    public void printSorryMessage() {
-    }
 }
