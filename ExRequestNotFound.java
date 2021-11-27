@@ -1,4 +1,4 @@
-public class ExRequestNotFound extends Exception {
+public class ExRequestNotFound extends ExObjectNotFound {
     public ExRequestNotFound() {
         super("Request record is not found.");
     }

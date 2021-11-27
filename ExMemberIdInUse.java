@@ -1,4 +1,4 @@
-public class ExMemberIdInUse extends Exception {
+public class ExMemberIdInUse extends ExEntityRegistration {
     public ExMemberIdInUse() {
         super("Member ID already in use!");
     }

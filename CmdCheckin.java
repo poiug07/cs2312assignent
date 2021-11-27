@@ -33,13 +33,13 @@ public class CmdCheckin extends RecordedCommand {
         this.statusdump = temp;
 
         if(temp instanceof ItemStatusOnhold) {
-            item.insertIntoQueue(member, 0);
+            item.insertIntoQueue(temp.getMember(), 0);
             try {
-                member.request();
+                temp.getMember().request();
             } catch (ExRequestQuotaExceeded e) {
                 // Do nothing
             }
-            System.out.printf("Sorry. %s please ignore the pick up notice for %s.\n", member.getIdPlusName(), item.getIdPlusName());
+            System.out.printf("Sorry. %s please ignore the pick up notice for %s.\n", temp.getMember().getIdPlusName(), item.getIdPlusName());
         }
     
         try {

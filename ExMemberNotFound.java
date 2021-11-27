@@ -1,4 +1,4 @@
-public class ExMemberNotFound extends Exception {
+public class ExMemberNotFound extends ExObjectNotFound {
     public ExMemberNotFound() {
         super("Member not found.");
     }

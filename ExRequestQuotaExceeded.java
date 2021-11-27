@@ -1,4 +1,4 @@
-public class ExRequestQuotaExceeded extends Exception {
+public class ExRequestQuotaExceeded extends ExQuotaExceeded {
     public ExRequestQuotaExceeded() {
         super("Item request quota exceeded.");
     }

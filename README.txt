@@ -1,0 +1,1 @@
+'// Do nothing' comment inside try-catch block means this try-catch is used just to avoid compilation errors, because that errors cannot occur.

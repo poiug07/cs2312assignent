@@ -1,4 +1,4 @@
-public class ExItemNotAvailable extends Exception {
+public class ExItemNotAvailable extends ExInvalidOperation {
     public ExItemNotAvailable() {
         super("Item not available.");
     }

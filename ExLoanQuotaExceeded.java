@@ -1,4 +1,4 @@
-public class ExLoanQuotaExceeded extends Exception {
+public class ExLoanQuotaExceeded extends ExQuotaExceeded {
     public ExLoanQuotaExceeded() {
         super("Loan quota exceeded.");
     }
