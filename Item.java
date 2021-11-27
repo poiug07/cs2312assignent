@@ -5,6 +5,7 @@ public class Item implements Comparable<Item> {
     private String name;
     private Day arrDate;
     private ItemStatus status;
+    // Queue contains only member in the queue, onHold Members considered out of queue
     private ArrayList<Member> queue;
 
     public Item(String i, String n) throws ExItemIdInUse {
@@ -33,10 +34,6 @@ public class Item implements Comparable<Item> {
         return String.format("%-5s%-17s%11s   %s", "ID", "Name", "  Arrival  ", "Status");
     }
 
-    public boolean isAvailable() {
-        return (status instanceof ItemStatusAvailable);
-    }
-
     @Override
     public int compareTo(Item another) {
         return this.id.compareTo(another.id);
@@ -54,10 +51,9 @@ public class Item implements Comparable<Item> {
         return name;
     }
 
-    public void tryToCheckout(Member m)
-            throws ExItemBorrowedByAnother, ExLoanQuotaExceeded, ExItemNotAvailable, ExItemAlreadyBorrowedByThis {
+    public void tryToCheckout(Member m) throws ExLoanQuotaExceeded, ExItemNotAvailable, ExItemAlreadyBorrowedByThis {
         if (status.isAvailableTo(m)) {
-            m.checkoutItem(); // Exception might be thrown by it
+            m.checkoutItem(); // Exception might be thrown
             status = new ItemStatusBorrowed(m, SystemDate.getInstance().clone(), queue);
         } else {
             if (status.getMember() == m)
@@ -72,6 +68,7 @@ public class Item implements Comparable<Item> {
             throw new ExItemBorrowedByAnother();
         } else {
             m.decrementBorrowedItems();
+
             status = new ItemStatusAvailable();
             if (queue.size() > 0) {
                 Member onholdfor = queue.get(0);
@@ -80,20 +77,20 @@ public class Item implements Comparable<Item> {
                 queue.remove(0);
                 onholdfor.decrementRequestedItems();
             }
-            if (this.getStatus().checkinOperationMsg() != null)
-                System.out.println(this.getStatus().checkinOperationMsg());
+            if (status.checkinOperationMsg() != null)
+                System.out.println(status.checkinOperationMsg());
         }
     }
 
     public void request(Member m)
             throws ExRequestQuotaExceeded, ExAlreadyRequested, ExItemIsAvailable, ExItemAlreadyBorrowedByThis {
-        if (status instanceof ItemStatusAvailable || status.isAvailableTo(m)) {
+        if (status.isAvailableTo(m)) {
             throw new ExItemIsAvailable();
         }
         if (status.getMember() == m)
             throw new ExItemAlreadyBorrowedByThis();
         if (!queue.contains(m)) {
-            m.request();
+            m.request(); // Exception might be thrown
             this.queue.add(m);
         } else {
             throw new ExAlreadyRequested();
