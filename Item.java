@@ -47,11 +47,11 @@ public class Item implements Comparable<Item> {
     public void changeStatus(ItemStatus s) {
         status = s;
     }
-    
+
     public ItemStatus getStatus() {
         return status;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -111,7 +111,6 @@ public class Item implements Comparable<Item> {
         }
     }
 
-    
     public int getIdxInQueue(Member m) {
         return queue.indexOf(m);
     }

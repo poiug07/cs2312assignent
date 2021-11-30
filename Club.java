@@ -16,16 +16,16 @@ public class Club {
     }
 
     public Member getMember(String id) {
-        for(Member m: allMembers) {
-            if(m.getId().equals(id))
+        for (Member m : allMembers) {
+            if (m.getId().equals(id))
                 return m;
         }
         return null;
     }
 
     public Item getItem(String id) {
-        for(Item i: allItems) {
-            if(i.getId().equals(id))
+        for (Item i : allItems) {
+            if (i.getId().equals(id))
                 return i;
         }
         return null;
@@ -65,7 +65,7 @@ public class Club {
 
     public void updateOnHolds() {
         Day newDate = SystemDate.getInstance();
-        for(Item item: allItems){
+        for (Item item : allItems) {
             item.updateOnHold(newDate);
         }
     }

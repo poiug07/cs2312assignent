@@ -4,7 +4,7 @@ public class CmdRegister extends RecordedCommand {
 
     @Override
     public void execute(String[] cmdParts) throws ExMemberIdInUse, ExInsufficientArguments {
-        if (!ArgumentNumberChecker.pass(3, cmdParts)){
+        if (!ArgumentNumberChecker.pass(3, cmdParts)) {
             throw new ExInsufficientArguments();
         }
 
@@ -26,7 +26,7 @@ public class CmdRegister extends RecordedCommand {
     @Override
     public void redoMe() {
         Club.getInstance().addMember(member);
-        
+
         addUndoCommand(this);
     }
 }

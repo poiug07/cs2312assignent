@@ -8,8 +8,8 @@ public class Member implements Comparable<Member> {
 
     public Member(String aId, String aName) throws ExMemberIdInUse {
         Member exists = Club.getInstance().getMember(aId);
-        if(exists!=null)
-            throw new ExMemberIdInUse("Member ID already in use: "+ exists.getIdPlusName());
+        if (exists != null)
+            throw new ExMemberIdInUse("Member ID already in use: " + exists.getIdPlusName());
 
         id = aId;
         name = aName;
@@ -28,20 +28,20 @@ public class Member implements Comparable<Member> {
 
     public String getListingString() {
         return String.format("%-5s%-9s%11s%7d%13d",
-                            this.id,
-                            this.name,
-                            this.joinDate,
-                            this.numOfBorrowedItems,
-                            this.numOfRequestedItems);
+                this.id,
+                this.name,
+                this.joinDate,
+                this.numOfBorrowedItems,
+                this.numOfRequestedItems);
     }
 
     public static String getListingHeader() {
         return String.format("%-5s%-9s%11s%11s%13s",
-                            "ID",
-                            "Name",
-                            "Join Date",
-                            "#Borrowed",
-                            "#Requested");
+                "ID",
+                "Name",
+                "Join Date",
+                "#Borrowed",
+                "#Requested");
     }
 
     @Override
@@ -50,19 +50,20 @@ public class Member implements Comparable<Member> {
     }
 
     public void checkoutItem() throws ExLoanQuotaExceeded {
-        if(numOfBorrowedItems>=6) {
+        if (numOfBorrowedItems >= 6) {
             // Throw Exception QuotaLimitExceeded
             throw new ExLoanQuotaExceeded();
         } else {
             numOfBorrowedItems++;
         }
     }
+
     public void decrementBorrowedItems() {
         numOfBorrowedItems--;
     }
 
     public void request() throws ExRequestQuotaExceeded {
-        if(numOfRequestedItems>=3)
+        if (numOfRequestedItems >= 3)
             throw new ExRequestQuotaExceeded();
         numOfRequestedItems++;
     }

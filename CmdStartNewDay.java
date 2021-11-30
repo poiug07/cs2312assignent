@@ -10,7 +10,7 @@ public class CmdStartNewDay extends RecordedCommand {
 
         instance.set(cmdParts[1]);
         Club.getInstance().updateOnHolds();
-        
+
         addUndoCommand(this);
         clearRedoList();
 
@@ -33,7 +33,7 @@ public class CmdStartNewDay extends RecordedCommand {
         String temp = instance.toString();
         instance.set(dump);
         dump = temp;
-        
+
         addUndoCommand(this);
     }
 }

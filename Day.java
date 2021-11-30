@@ -17,7 +17,7 @@ public class Day implements Cloneable, Comparable<Day> {
     @Override
     public String toString() {
         String str = date.format(formatter);
-        if(str.charAt(0)=='0')
+        if (str.charAt(0) == '0')
             return str.substring(1);
         return str;
     }

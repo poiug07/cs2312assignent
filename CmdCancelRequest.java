@@ -18,9 +18,9 @@ public class CmdCancelRequest extends RecordedCommand {
         if (item == null)
             throw new ExItemNotFound();
         idx = item.getIdxInQueue(member);
-        
+
         item.cancelRequest(member);
-        
+
         addUndoCommand(this);
         clearRedoList();
 
@@ -35,7 +35,7 @@ public class CmdCancelRequest extends RecordedCommand {
         } catch (ExRequestQuotaExceeded e) {
             // Do nothing
         }
-        
+
         addRedoCommand(this);
     }
 
@@ -47,7 +47,7 @@ public class CmdCancelRequest extends RecordedCommand {
         } catch (ExRequestNotFound e) {
             // Do nothing
         }
-        
+
         addUndoCommand(this);
     }
 

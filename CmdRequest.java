@@ -21,7 +21,7 @@ public class CmdRequest extends RecordedCommand {
         statusdump = item.getStatus();
 
         item.request(member);
-        
+
         addUndoCommand(this);
         clearRedoList();
 
